@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="generator" content="Web Page Maker">
+<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body bgColor="#000000">
+<div id="js1" style="position:absolute; overflow:hidden; left:92px; top:492px; width:823px; height:135px; z-index:0">
+<div id="c_js1" style="overflow:hidden;height:100%;width:100%;">
+  <table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+    	<td id="p1_js1" height="135" valign="middle" style="white-space: nowrap"><img border="0" src="images//SADIB.jpg" alt="SADIB" title="SADIB" hspace="5"><img border="0" src="images//SAE.jpg" alt="SAE" title="SAE" hspace="5"></td>
+    	<td id="p2_js1" valign="middle" style="white-space: nowrap"></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+var speed=30
+var i=0
+var n=Math.floor(js1.offsetWidth/p1_js1.offsetWidth)
+for (i=0;i<=n;i++)
+{
+p2_js1.innerHTML+=p1_js1.innerHTML
+}
+function m_js1()
+{
+if(c_js1.scrollLeft>=p1_js1.offsetWidth)
+  c_js1.scrollLeft-=p1_js1.offsetWidth
+else
+  c_js1.scrollLeft++
+}
+var mm_js1=setInterval(m_js1,speed) 
+c_js1.onmouseover=function(){clearInterval(mm_js1)} 
+c_js1.onmouseout=function(){mm_js1=setInterval(m_js1,speed)} 
+</script></div>
+<div id="text1" style="position:absolute; overflow:hidden; left:93px; top:34px; width:826px; height:49px; z-index:1">
+<div class="wpmd">
+<div><font color="#FF6600" face="Calibri" class="ws28"><B>RUANG PERTUNJUKAN</B></font></div>
+</div></div>
+
+<div id="hr1" style="position:absolute; overflow:hidden; left:96px; top:82px; width:819px; height:17px; z-index:2">
+<hr size=2 width=819 NOSHADE=true color="#FF6600">
+</div>
+
+<input name="formbutton1" type="submit" value="JADWAL PERTUNJUKAN" style="position:absolute;left:695px;top:99px;z-index:3">
+<input name="formbutton2" type="submit" value="Kemarin" style="position:absolute;left:93px;top:100px;z-index:4">
+<input name="formbutton3" type="submit" value="Sekarang" style="position:absolute;left:176px;top:100px;z-index:5">
+<input name="formbutton4" type="submit" value="Akan Datang" style="position:absolute;left:269px;top:100px;z-index:6">
+<div id="shape1" style="position:absolute; overflow:hidden; left:92px; top:134px; width:823px; height:368px; z-index:7"><img border=0 width="100%" height="100%" alt="" src="images/shape1091111281.gif"></div>
+
+<select name="formselect1" style="position:absolute;left:407px;top:101px;width:200px;z-index:8">
+<option value="">Tema Pertunjukan</option>
+</select>
+
+</body>
+</html>
