@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pencarian Properti Transparan</title>
+  <style>
+    body { font-family: sans-serif; }
+    #gallery { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    img { cursor: pointer; max-height: 140px; border-radius: 6px; }
+    #controls { margin-top: 10px; }
+    #searchBox { padding: 6px; width: 200px; }
+    #searchBtn, #prevBtn, #nextBtn { padding: 6px 12px; margin: 0 4px; }
+  </style>
+</head>
+<body>
+  <h2>Cari Properti Transparan (Pixabay)</h2>
+  <input id="searchBox" type="text" placeholder="Masukkan kata kunci...">
+  <button id="searchBtn">Cari</button>
+  
+  <div id="gallery"></div>
+  
+  <div id="controls">
+    <button id="prevBtn">Prev</button>
+    <span id="pageInfo"></span>
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    const API_KEY = "53828497-ab7d0df377435faa1b9f9b9d3";
+    let currentQuery = "transparent png";
+    let currentPage = 1;
+
+    function searchPixabay(query, page=1) {
+      const url = `https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=png&per_page=12&page=${page}&safesearch=true`;
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const gallery = document.getElementById("gallery");
+          gallery.innerHTML = "";
+          data.hits.forEach(img => {
+            const el = document.createElement("img");
+            el.src = img.previewURL;
+            el.title = img.tags;
+            el.onclick = () => {
+              const fullURL = img.largeImageURL || img.webformatURL;
+              // kirim ke Construct 2
+              window.parent.postMessage(fullURL, "*");
+            };
+            gallery.appendChild(el);
+          });
+          document.getElementById("pageInfo").textContent = `Halaman ${page}`;
+        })
+        .catch(err => console.error(err));
+    }
+
+    // pencarian awal
+    searchPixabay(currentQuery, currentPage);
+
+    // tombol cari
+    document.getElementById("searchBtn").onclick = () => {
+      const q = document.getElementById("searchBox").value;
+      if (q.trim() !== "") {
+        currentQuery = q;
+        currentPage = 1;
+        searchPixabay(currentQuery, currentPage);
+      }
+    };
+
+    // tombol prev
+    document.getElementById("prevBtn").onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        searchPixabay(currentQuery, currentPage);
+      }
+    };
+
+    // tombol next
+    document.getElementById("nextBtn").onclick = () => {
+      currentPage++;
+      searchPixabay(currentQuery, currentPage);
+    };
+  </script>
+</body>
+</html>
