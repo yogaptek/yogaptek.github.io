@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+	<string id='adegan'>Adegan</string>
+	<string id='properti'>Properti</string>
+	<string id='tokoh'>Nama Tokoh</string>
+	<string id='deskripsi'>Dialog</string>
+	<string id='panggung'>Panggung</string>
+	<string id='pengaturan'>Pengaturan</string>
+	<string id='pengguna'>Profil Pengguna</string>
+	<string id='papan'>  Daftar Nama</string>
+	<string id='karakteristik'>Karakteristik</string>
+	<string id='tambahan'>Informasi Tambahan</string>
+	<string id='adeganpreview'>ADEGAN:</string>
+	<string id='spektakel'>SPEKTAKEL</string>
+	<string id='bahasa'>Bahasa</string>
+	<string id='desc'>Karya</string>
+	<string id='nama'>NAMA:</string>
+	<string id='dialog'>DIALOG</string>
+	<string id='ket'>*) Pilih salah satu</string>
+</strings>

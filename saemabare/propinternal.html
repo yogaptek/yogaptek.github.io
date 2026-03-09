@@ -1,0 +1,165 @@
+
+
+<!-- saved from url=(0074)file:///C:/Users/bismillah/AppData/Local/Temp/cap2WGU0E/Files/content.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style>
+/* Main dialog wrap element (the main HTML element itself).
+   This uses a flex column layout to arrange the top, middle and bottom sections. */
+/* Main dialog wrap element */
+/* Main dialog wrap element */
+.dialogWrap {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dialog title text */
+.dialogWrap .topSection .topTitle {
+    margin: 0.2em 0.5em;
+    font-family: monospace;
+}
+
+/* Middle section: galeri wrap ke bawah */
+.dialogWrap .middleSection {
+    display: flex;
+    flex-direction: row;   /* susun ke kanan */
+    flex-wrap: wrap;       /* biar turun ke bawah */
+    overflow-y: auto;      /* scroll vertikal */
+    overflow-x: hidden;    /* jangan scroll horizontal */
+    border-top: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    padding: 0.2em;
+    max-height: 20em;      /* batasi tinggi container agar scroll muncul */
+}
+
+/* Item box */
+.dialogWrap .middleSection .itemBox {
+    flex: 0 0 auto;
+    width: 3em;
+    height: 3em;
+    margin: 0.2em;
+    border: 3px solid #444;
+    border-radius: 0.3em;
+    background-color: #aaa;
+    position: relative;
+}
+
+/* Gambar di dalam item box */
+.dialogWrap .middleSection .itemBox img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+}
+
+/* Hover effect */
+.dialogWrap .middleSection .itemBox:hover {
+    background-color: #eea;
+    border-color: orange;
+}
+
+/* Selected effect */
+.dialogWrap .middleSection .itemBox.selected {
+    background-color: white;
+    border-color: red;
+}
+
+/* Counter nomor otomatis */
+.dialogWrap .middleSection {
+    counter-reset: itemCounter -1;
+}
+.dialogWrap .middleSection .itemBox::after {
+    counter-increment: itemCounter;
+    content: counter(itemCounter);
+    position: absolute;
+    bottom: 0.3em;
+    right: 0.4em;
+    font-size: 0.9em;
+    font-family: monospace;
+    color: #222;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.1em 0.3em;
+    border-radius: 0.2em;
+}
+
+/* Bottom section */
+.dialogWrap .bottomSection {
+    height: 2em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding-top: 0.5em;
+    padding-right: 1.1em;
+    padding-bottom: 1.1em;
+}
+
+/* Bottom section buttons */
+.dialogWrap .bottomSection button {
+    width: 20%;
+    margin-left: 5%;
+    font-size: 1.3em;
+    font-family: monospace;
+    background-color: #eee;
+    border-radius: 0.3em;
+    box-shadow: 0.3em 0.3em 0.5em #444;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Button hover/active */
+.dialogWrap .bottomSection button:hover {
+    background-color: #eff;
+}
+.dialogWrap .bottomSection button:active {
+    background-color: #ffa;
+}
+</style>
+
+<!-- Top section: has the dialog title -->
+</head><body>
+
+<!-- Middle section: a list of items to choose from -->
+<div class="middleSection">
+<div class="itemBox item0 "></div>
+<div class="itemBox item1 "></div>
+<div class="itemBox item2 "></div>
+<div class="itemBox item3 "></div>
+<div class="itemBox item4 "></div>
+<div class="itemBox item5 "></div>
+<div class="itemBox item6 "></div>
+<div class="itemBox item7 "></div>
+<div class="itemBox item8 "></div>
+<div class="itemBox item9 "></div>
+<div class="itemBox item10"></div>
+<div class="itemBox item11"></div>
+<div class="itemBox item12"></div>
+<div class="itemBox item13"></div>
+<div class="itemBox item14"></div>
+<div class="itemBox item15"></div>
+<div class="itemBox item16"></div>
+<div class="itemBox item17"></div>
+<div class="itemBox item18"></div>
+<div class="itemBox item19"></div>
+<div class="itemBox item20"></div>
+<div class="itemBox item21"></div>
+<div class="itemBox item22"></div>
+<div class="itemBox item23"></div>
+<div class="itemBox item24"></div>
+<div class="itemBox item25"></div>
+<div class="itemBox item26"></div>
+<div class="itemBox item27"></div>
+<div class="itemBox item28"></div>
+<div class="itemBox item29"></div>
+<div class="itemBox item30"></div>
+<div class="itemBox item31"></div>
+<div class="itemBox item32"></div>
+<div class="itemBox item33"></div>
+<div class="itemBox item34"></div>
+<div class="itemBox item35"></div>
+<div class="itemBox item36"></div>
+<div class="itemBox item37"></div>
+<div class="itemBox item38"></div>
+<div class="itemBox item39"></div>
+<div class="itemBox item40"></div>
+<div class="itemBox item41"></div>
+</div>
+
+<!-- Bottom section: OK and Cancel buttons -->
+</body></html>

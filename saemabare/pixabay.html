@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pencarian Properti Transparan</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background-color: gray;
+      font-size: 14px;
+    }
+
+    /* Tab menu */
+    .tabMenu {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .tabMenu button {
+      flex: 1 1 auto;
+      min-width: 100px;
+      padding: 8px 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background: #444;
+      color: white;
+    }
+    .tabMenu button.active {
+      background: #222;
+      font-weight: bold;
+    }
+
+    .tabContent { display: none; }
+    .tabContent.active { display: block; }
+
+    /* Kontrol pencarian */
+    #searchControls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      justify-content: center;
+    }
+    #searchBox {
+      flex: 1 1 200px;
+      max-width: 300px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #searchBtn {
+      padding: 6px 12px;
+      flex: 0 0 auto;
+    }
+
+    /* Galeri */
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    #gallery img {
+      cursor: pointer;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    #gallery img:hover {
+      transform: scale(1.05);
+      border-color: orange;
+    }
+
+    #pageInfo {
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    /* Kontrol URL di bawah galeri */
+    #urlControls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      justify-content: center;
+    }
+    #urlBox, #urlBox3 {
+      flex: 1 1 300px;
+      max-width: 400px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #copyBtn, #prevBtn, #insertBtn, #nextBtn, #insertBtn3 {
+      padding: 6px 12px;
+      flex: 0 0 auto;
+    }
+
+    /* Tab 3 preview */
+    #previewBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    #previewBox img {
+      max-width: 200px;
+      max-height: 200px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 600px) {
+  #searchControls, #urlControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #searchBox, #urlBox, #urlBox3 {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+  /* Tombol umum melebar penuh */
+  #searchBtn, #copyBtn, #insertBtn, #insertBtn3 {
+    width: 100%;
+  }
+  /* Jangan ubah prev/next */
+}
+/* Tombol navigasi fixed di bawah layar */
+#prevBtn, #nextBtn {
+  position: fixed;
+  bottom: 20px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background: #444;
+  color: white;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Posisi masing-masing */
+#prevBtn { left: 20px; }
+#nextBtn { right: 20px; }
+
+/* Hover effect */
+#prevBtn:hover, #nextBtn:hover {
+  background: #222;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Tab menu -->
+  <div class="tabMenu">
+    <button onclick="openTab(2)" class="active">Tab 2: Pixabay</button>
+    <button onclick="openTab(3)">Tab 3: URL & Preview</button>
+  </div>
+
+  <!-- Tab 2 -->
+  <div id="tab2" class="tabContent active">
+    <div id="searchControls">
+      <input id="searchBox" type="text" placeholder="Masukkan kata kunci...">
+      <button id="searchBtn">Cari</button>
+    </div>
+
+    <div id="pageInfo"></div>
+    <div id="gallery"></div>
+
+    <!-- URL + tombol di bawah galeri -->
+    <div id="urlControls">
+      <input id="urlBox" type="text" placeholder="Klik gambar, URL muncul di sini">
+      <button id="copyBtn">Copy</button>
+      <button id="prevBtn">Prev</button>
+      <button id="insertBtn">Tambahkan ke panggung</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <!-- Tab 3 -->
+  <div id="tab3" class="tabContent">
+    <div id="urlControls">
+      <input id="urlBox3" type="text" placeholder="Masukkan URL gambar...">
+      <button id="insertBtn3">Tambahkan ke panggung</button>
+    </div>
+    <div id="previewBox">
+      <img id="previewImg" src="" alt="Preview akan muncul di sini">
+    </div>
+  </div>
+
+  <script>
+    function openTab(n) {
+      document.querySelectorAll('.tabMenu button').forEach((btn,i)=>{
+        btn.classList.toggle('active', i===n-2);
+      });
+      document.querySelectorAll('.tabContent').forEach((tab,i)=>{
+        tab.classList.toggle('active', i===n-2);
+      });
+    }
+
+    const API_KEY = "53828497-ab7d0df377435faa1b9f9b9d3";
+    let currentQuery = "transparent png";
+    let currentPage = 1;
+
+    function kirimKeConstruct2(url) {
+      const pesan = { type: "function", name: "kirimURL", params: [url] };
+      window.parent.postMessage(pesan, "*");
+    }
+
+    function searchPixabay(query, page = 1) {
+      const url = `https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=png&per_page=12&page=${page}&safesearch=true`;
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const gallery = document.getElementById("gallery");
+          gallery.innerHTML = "";
+          data.hits.forEach(img => {
+            const fullURL = img.largeImageURL || img.webformatURL;
+            const el = document.createElement("img");
+            el.src = img.previewURL;
+            el.title = img.tags;
+            el.onclick = () => {
+              document.getElementById("urlBox").value = fullURL;
+              navigator.clipboard.writeText(fullURL).catch(err => console.error(err));
+            };
+            el.ondblclick = () => {
+              document.getElementById("urlBox").value = fullURL;
+              kirimKeConstruct2(fullURL);
+            };
+            gallery.appendChild(el);
+          });
+          document.getElementById("pageInfo").textContent = `Halaman ${page}`;
+        })
+        .catch(err => console.error(err));
+    }
+
+    // pencarian awal
+    searchPixabay(currentQuery, currentPage);
+
+    // tombol cari
+    document.getElementById("searchBtn").onclick = () => {
+      const q = document.getElementById("searchBox").value;
+      if (q.trim() !== "") {
+        currentQuery = q;
+        currentPage = 1;
+        searchPixabay(currentQuery, currentPage);
+      }
+    };
+
+    // tombol prev
+    document.getElementById("prevBtn").onclick = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        searchPixabay(currentQuery, currentPage);
+      }
+    };
+
+    // tombol next
+    document.getElementById("nextBtn").onclick = () => {
+      currentPage++;
+      searchPixabay(currentQuery, currentPage);
+    };
+
+    // tombol copy manual
+    document.getElementById("copyBtn").onclick = () => {
+      const urlBox = document.getElementById("urlBox");
+      if (urlBox.value.trim() !== "") {
+        navigator.clipboard.writeText(urlBox.value).catch(err => console.error(err));
+      }
+    };
+
+       // tombol masukkan → kirim ke Construct 2
+    document.getElementById("insertBtn").onclick = () => {
+      const urlBox = document.getElementById("urlBox");
+      if (urlBox.value.trim() !== "") {
+        kirimKeConstruct2(urlBox.value);
+      }
+    };
+
+    // Tab 3 preview: update gambar saat URL diubah
+    document.getElementById("urlBox3").addEventListener("input", () => {
+      const val = document.getElementById("urlBox3").value.trim();
+      const preview = document.getElementById("previewImg");
+      preview.src = val !== "" ? val : "";
+    });
+
+    // Tombol insert di Tab 3
+    document.getElementById("insertBtn3").onclick = () => {
+      const val = document.getElementById("urlBox3").value.trim();
+      if (val !== "") {
+        kirimKeConstruct2(val);
+      }
+    };
+
+    // Nonaktifkan klik kanan di seluruh halaman
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+      return false;
+    });
+  </script>
+</body>
+</html>
